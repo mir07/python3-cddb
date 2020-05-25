@@ -3,7 +3,7 @@
 Module for retrieving CDDB v1 data from CDDB servers via HTTP
 
 Written 17 Nov 1999 by Ben Gertzfield <che@debian.org>
-This work is released under the GNU GPL, version 2 or later.
+This work is released under the GNU GPL, version 3 or later.
 
 Release version 1.4
  
@@ -13,6 +13,7 @@ by Michael Rasmussen <mir@datanom.net>
  - 'track_info' can be and instance off discid.Disc from
    python3-libdiscid
  - Add feature to use login for default_user and hostname
+ - Changed license to GPLv3 or later
 """
 
 import urllib.parse, urllib.request, os, socket, re
@@ -49,7 +50,8 @@ def query(track_info, server_url=default_server,
 	  user=default_user, host=hostname, client_name=name,
           client_version=version):
 
-    if isinstance(track_info,  discid.Disc) or isinstance(track_info, discid.Disc):
+    if isinstance(track_info,  discid.Disc) or isinstance(track_info, discid):
+        # track_info is an instance from libdiscid 
         track_info = _query_libdiscid(track_info)
     
     disc_id = track_info[0]
